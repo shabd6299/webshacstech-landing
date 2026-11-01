@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WebShacsTech - Agentic AI, AI Swarms, and full business automation for high-growth businesses." />
+  <title>WebShacsTech | Your Business, On Autopilot.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #0f1115;
+      --bg-deep: #0b0d11;
+      --card-bg: rgba(28, 31, 37, 0.78);
+      --text-primary: #f3f4f6;
+      --text-secondary: #a3aab8;
+      --text-muted: #7e8696;
+      --line: rgba(148, 163, 184, 0.18);
+      --blue: #4b5563;
+      --blue-soft: #6b7280;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --shadow-blue: 0 0 0 1px rgba(148, 163, 184, 0.16), 0 20px 70px rgba(15, 23, 42, 0.2);
+      --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.35);
+      --container: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at 20% -20%, rgba(148, 163, 184, 0.06), transparent 45%), var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(rgba(255, 255, 255, 0.02) 0.8px, transparent 0.8px),
+        radial-gradient(rgba(255, 255, 255, 0.01) 0.8px, transparent 0.8px);
+      background-size: 3px 3px, 4px 4px;
+      background-position: 0 0, 1px 1px;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.3;
+      mix-blend-mode: soft-light;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 92px 0;
+      position: relative;
+      z-index: 3;
+    }
+
+    .section-title {
+      font-family: "Plus Jakarta Sans", Inter, sans-serif;
+      font-size: clamp(1.9rem, 2.8vw, 2.9rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin: 0 0 14px;
+    }
+
+    .section-subtitle {
+      max-width: 720px;
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 16px 0;
+      transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-header.scrolled {
+      background: rgba(12, 14, 18, 0.8);
+      border-color: rgba(148, 163, 184, 0.15);
+      backdrop-filter: blur(14px);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      min-width: 230px;
+    }
+
+    .brand-name {
+      font-family: "Plus Jakarta Sans", Inter, sans-serif;
+      font-size: 1.28rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .brand-tagline {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.24s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(31, 36, 44, 0.72);
+      color: #e5e7eb;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 22px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--blue-soft));
+      color: #f9fafb;
+      box-shadow: 0 0 0 1px rgba(203, 213, 225, 0.16), 0 14px 40px rgba(15, 23, 42, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      animation: ctaPulse 2.6s ease-in-out infinite;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 0 1px rgba(226, 232, 240, 0.22), 0 24px 58px rgba(17, 24, 39, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .magnetic {
+      will-change: transform;
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(148, 163, 184, 0.32);
+      color: #d1d5db;
+      background: rgba(31, 36, 44, 0.62);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(203, 213, 225, 0.62);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    @keyframes ctaPulse {
+      0%,
+      100% {
+        box-shadow: 0 0 0 1px rgba(203, 213, 225, 0.16), 0 14px 40px rgba(15, 23, 42, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      }
+      50% {
+        box-shadow: 0 0 0 1px rgba(226, 232, 240, 0.22), 0 22px 58px rgba(17, 24, 39, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    .hero {
+      padding-top: 70px;
+      padding-bottom: 90px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: min(860px, 90vw);
+      height: min(860px, 90vw);
+      border-radius: 999px;
+      left: 50%;
+      top: 6%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(148, 163, 184, 0.2) 0%, rgba(148, 163, 184, 0.05) 42%, rgba(148, 163, 184, 0) 72%);
+      z-index: 0;
+      filter: blur(10px);
+      pointer-events: none;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(148, 163, 184, 0.14), rgba(107, 114, 128, 0.06) 46%, rgba(107, 114, 128, 0) 70%);
+      filter: blur(20px);
+      pointer-events: none;
+      left: 50%;
+      top: 170px;
+      transform: translate(-50%, -50%);
+      transition: transform 120ms linear;
+      z-index: 1;
+      opacity: 0.8;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(29, 33, 40, 0.68);
+      color: #d1d5db;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      box-shadow: 0 0 16px rgba(148, 163, 184, 0.2);
+      animation: badgePulse 2.3s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%,
+      100% {
+        transform: translateY(0);
+        box-shadow: 0 0 12px rgba(148, 163, 184, 0.14);
+      }
+      50% {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(148, 163, 184, 0.2);
+      }
+    }
+
+    .hero h1 {
+      margin: 20px auto 0;
+      font-family: "Plus Jakarta Sans", Inter, sans-serif;
+      font-size: clamp(2.3rem, 8vw, 5.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.045em;
+      max-width: 760px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 24px auto 0;
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 2.1vw, 1.3rem);
+      line-height: 1.72;
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .workflow {
+      margin: 46px auto 0;
+      border-radius: var(--radius);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 28px 24px;
+      background: linear-gradient(180deg, rgba(28, 32, 39, 0.84), rgba(18, 21, 27, 0.92));
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .workflow::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 54px rgba(148, 163, 184, 0.08);
+      pointer-events: none;
+    }
+
+    .workflow.active {
+      border-color: rgba(148, 163, 184, 0.45);
+      box-shadow: 0 20px 58px rgba(5, 10, 20, 0.58), 0 0 0 1px rgba(148, 163, 184, 0.25), inset 0 0 56px rgba(148, 163, 184, 0.08);
+    }
+
+    .workflow-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      gap: 20px;
+      align-items: center;
+    }
+
+    .flow-step {
+      padding: 12px 10px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      background: rgba(35, 39, 46, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      position: relative;
+      transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+    }
+
+    .flow-step.hot {
+      border-color: rgba(203, 213, 225, 0.65);
+      box-shadow: 0 0 20px rgba(148, 163, 184, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -20px;
+      width: 20px;
+      border-top: 2px dashed rgba(148, 163, 184, 0.45);
+      transform: translateY(-50%);
+      animation: dashMove 1.4s linear infinite;
+    }
+
+    .flow-step:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      transform: translateY(-50%);
+      background: var(--blue-soft);
+      box-shadow: 0 0 14px rgba(148, 163, 184, 0.5);
+      animation: nodePulse 1.2s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes dashMove {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 20px 0;
+      }
+    }
+
+    @keyframes nodePulse {
+      0%,
+      100% {
+        transform: translateY(-50%) scale(1);
+      }
+      50% {
+        transform: translateY(-50%) scale(1.3);
+      }
+    }
+
+    .trusted {
+      padding: 42px 0;
+      border-top: 1px solid rgba(148, 163, 184, 0.12);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+      background: rgba(16, 19, 24, 0.74);
+    }
+
+    .trusted-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .trusted-text {
+      color: #cbd5e1;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .trusted-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .logo-pill {
+      color: #7f92b3;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.84rem;
+      background: rgba(15, 24, 43, 0.55);
+    }
+
+    .cards-grid-3,
+    .cards-grid-6,
+    .cards-grid-4 {
+      margin-top: 34px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .cards-grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .cards-grid-6 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .cards-grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(148, 163, 184, 0.5);
+      box-shadow: 0 18px 52px rgba(5, 10, 20, 0.62), 0 0 0 1px rgba(148, 163, 184, 0.28), 0 0 20px rgba(148, 163, 184, 0.14);
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(148, 163, 184, 0.12);
+      border: 1px solid rgba(148, 163, 184, 0.34);
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      margin: 0 0 9px;
+      font-size: 1.16rem;
+      font-family: "Plus Jakarta Sans", Inter, sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      line-height: 1.62;
+    }
+
+    .warning-card .icon {
+      background: rgba(248, 113, 113, 0.12);
+      border-color: rgba(248, 113, 113, 0.38);
+    }
+
+    .timeline {
+      margin-top: 36px;
+      position: relative;
+      padding-left: 34px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(148, 163, 184, 0.55), rgba(148, 163, 184, 0.08));
+    }
+
+    .timeline::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 0;
+      width: 2px;
+      height: 0;
+      background: linear-gradient(to bottom, rgba(226, 232, 240, 0.92), rgba(148, 163, 184, 0.2));
+      transition: height 1.25s ease;
+    }
+
+    .timeline.in-view::after {
+      height: 100%;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 26px 22px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .timeline.in-view .timeline-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline.in-view .timeline-item:nth-child(1) { transition-delay: 0.08s; }
+    .timeline.in-view .timeline-item:nth-child(2) { transition-delay: 0.16s; }
+    .timeline.in-view .timeline-item:nth-child(3) { transition-delay: 0.24s; }
+    .timeline.in-view .timeline-item:nth-child(4) { transition-delay: 0.32s; }
+    .timeline.in-view .timeline-item:nth-child(5) { transition-delay: 0.4s; }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -29px;
+      top: 2px;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      box-shadow: 0 0 14px rgba(148, 163, 184, 0.45);
+    }
+
+    .timeline-item strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 4px;
+      color: #eff6ff;
+      font-family: "Plus Jakarta Sans", Inter, sans-serif;
+    }
+
+    .timeline-item span {
+      color: var(--text-secondary);
+      font-size: 0.97rem;
+    }
+
+    .metric {
+      text-align: left;
+    }
+
+    .metric .num {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: clamp(1.8rem, 4vw, 2.65rem);
+      line-height: 1;
+      color: #e8f1ff;
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .metric .label {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+    }
+
+    .pricing-grid {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .pricing-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card .tier {
+      margin: 0;
+      font-size: 1.2rem;
+      font-family: "Plus Jakarta Sans", Inter, sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .pricing-card .price {
+      margin: 14px 0 8px;
+      font-size: 1.24rem;
+      font-weight: 700;
+      color: #eff6ff;
+    }
+
+    .pricing-card .desc {
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #e2e8f0;
+      background: rgba(148, 163, 184, 0.18);
+      border: 1px solid rgba(148, 163, 184, 0.42);
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+
+    .faq-list {
+      margin-top: 30px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .faq-item {
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 14px;
+      background: rgba(13, 23, 44, 0.7);
+      overflow: hidden;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(148, 163, 184, 0.46);
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.2);
+    }
+
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      color: #e7f0ff;
+      border: none;
+      padding: 17px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .faq-q span:last-child {
+      font-size: 1.26rem;
+      color: var(--text-secondary);
+      transition: transform 0.24s ease;
+    }
+
+    .faq-item.open .faq-q span:last-child {
+      transform: rotate(45deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.32s ease;
+    }
+
+    .faq-a p {
+      margin: 0;
+      color: var(--text-secondary);
+      padding: 0 20px 18px;
+      font-size: 0.96rem;
+    }
+
+    .final-cta {
+      background:
+        radial-gradient(circle at 20% 50%, rgba(148, 163, 184, 0.12), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(148, 163, 184, 0.08), transparent 40%),
+        var(--bg-deep);
+      border-top: 1px solid rgba(148, 163, 184, 0.16);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      margin: 0 0 12px;
+      font-family: "Plus Jakarta Sans", Inter, sans-serif;
+      letter-spacing: -0.03em;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+    }
+
+    .final-cta p {
+      margin: 0 auto 26px;
+      max-width: 680px;
+      color: var(--text-secondary);
+      font-size: 1.08rem;
+    }
+
+    .contact-block {
+      margin: 34px auto 0;
+      max-width: 780px;
+      text-align: left;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: var(--radius);
+      background: rgba(11, 21, 40, 0.72);
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow-card);
+      padding: 24px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 0.86rem;
+      color: #d6e7ff;
+      font-weight: 600;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: rgba(10, 18, 34, 0.9);
+      color: #eef5ff;
+      padding: 11px 12px;
+      font-family: Inter, sans-serif;
+      font-size: 0.94rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: rgba(148, 163, 184, 0.6);
+      box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.18);
+    }
+
+    .field-full {
+      grid-column: 1 / -1;
+    }
+
+    .contact-actions {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .form-note {
+      margin: 0;
+      color: #8ea6cb;
+      font-size: 0.83rem;
+    }
+
+    .form-message {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      min-height: 20px;
+      color: #9fb5d8;
+    }
+
+    .form-message.success {
+      color: #86efac;
+    }
+
+    .form-message.error {
+      color: #fda4af;
+    }
+
+    .btn[disabled] {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    footer {
+      padding: 34px 0 40px;
+      background: #050b16;
+      position: relative;
+      z-index: 3;
+    }
+
+    .footer-wrap {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand strong {
+      font-family: "Plus Jakarta Sans", Inter, sans-serif;
+      font-size: 1.04rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .footer-brand span {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #c8d9f6;
+      text-decoration: none;
+      font-size: 0.93rem;
+    }
+
+    .footer-meta {
+      width: 100%;
+      margin-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: #7790b6;
+      font-size: 0.88rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.15);
+      padding-top: 18px;
+    }
+
+    .swarm-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .swarm-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.48;
+    }
+
+    .swarm-particles span {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.72);
+      box-shadow: 0 0 8px rgba(148, 163, 184, 0.42);
+      animation: drift 7.4s linear infinite;
+    }
+
+    .swarm-particles span:nth-child(1) { left: 14%; top: 74%; animation-delay: 0s; }
+    .swarm-particles span:nth-child(2) { left: 30%; top: 62%; animation-delay: 1s; }
+    .swarm-particles span:nth-child(3) { left: 48%; top: 82%; animation-delay: 2.1s; }
+    .swarm-particles span:nth-child(4) { left: 63%; top: 72%; animation-delay: 0.6s; }
+    .swarm-particles span:nth-child(5) { left: 78%; top: 66%; animation-delay: 1.6s; }
+    .swarm-particles span:nth-child(6) { left: 88%; top: 77%; animation-delay: 2.7s; }
+
+    @keyframes drift {
+      0% { transform: translate(0, 0) scale(0.8); opacity: 0; }
+      10% { opacity: 0.9; }
+      60% { opacity: 0.7; }
+      100% { transform: translate(-10px, -72px) scale(1.2); opacity: 0; }
+    }
+
+    @media (max-width: 1100px) {
+      .cards-grid-6,
+      .cards-grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cards-grid-3,
+      .pricing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .workflow-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .flow-step:nth-child(3)::after,
+      .flow-step:nth-child(3)::before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .container {
+        width: min(var(--container), calc(100% - 30px));
+      }
+
+      section {
+        padding: 74px 0;
+      }
+
+      .site-header {
+        padding: 10px 0;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .navbar {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        row-gap: 12px;
+      }
+
+      .brand {
+        min-width: auto;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 14px;
+        grid-column: 1 / -1;
+        padding: 10px 0 4px;
+      }
+
+      .nav-links.mobile-open {
+        display: flex;
+      }
+
+      .hero {
+        padding-top: 44px;
+      }
+
+      .cards-grid-6,
+      .cards-grid-4,
+      .cards-grid-3,
+      .pricing-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .workflow-row {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-step:not(:last-child)::after {
+        width: 2px;
+        height: 16px;
+        border-top: none;
+        border-right: 2px dashed rgba(148, 163, 184, 0.45);
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: -16px;
+        transform: translateX(-50%);
+      }
+
+      .flow-step:not(:last-child)::before {
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: -5px;
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="navbar">
+    <div class="container">
+      <nav class="navbar">
+        <a href="#" class="brand">
+          <span class="brand-name">WebShacsTech</span>
+          <span class="brand-tagline">Your Business, On Autopilot.</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary nav-cta magnetic">Get Free Demo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-glow" id="heroGlow" aria-hidden="true"></div>
+      <div class="container hero-grid reveal">
+        <div class="badge">⚡ Agentic AI &amp; Automation Agency</div>
+        <h1>Your Business,<br />On Autopilot.</h1>
+        <p>
+          We automate your entire business — from simple workflows to fully autonomous AI Agents and AI Swarms.
+          You focus on growth. We handle everything else.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary magnetic">Book Free Demo</a>
+          <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
+        </div>
+
+        <div class="workflow reveal" aria-label="Automation Workflow Diagram">
+          <div class="workflow-row">
+            <div class="flow-step">Lead In</div>
+            <div class="flow-step">AI Agent Processes</div>
+            <div class="flow-step">WhatsApp Sent</div>
+            <div class="flow-step">CRM Updated</div>
+            <div class="flow-step">Deal Closed</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trusted reveal">
+      <div class="container trusted-wrap">
+        <p class="trusted-text">Powering businesses across India</p>
+        <div class="trusted-logos">
+          <span class="logo-pill">Nova Realty</span>
+          <span class="logo-pill">HealthVerse</span>
+          <span class="logo-pill">ShopNectar</span>
+          <span class="logo-pill">FinAxis</span>
+          <span class="logo-pill">EduPrime</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="container">
+        <h2 class="section-title">Still Doing This Manually?</h2>
+        <div class="cards-grid-3">
+          <article class="card warning-card">
+            <div class="icon">⚠️</div>
+            <h3>Missing leads because no one followed up in time</h3>
+            <p>Speed-to-lead drops every hour, and hot opportunities quietly slip away.</p>
+          </article>
+          <article class="card warning-card">
+            <div class="icon">⚠️</div>
+            <h3>Your team wasting hours on repetitive tasks</h3>
+            <p>Manual data entry, reminders, and updates drain your most valuable resource: focus.</p>
+          </article>
+          <article class="card warning-card">
+            <div class="icon">⚠️</div>
+            <h3>Losing deals to competitors who move faster</h3>
+            <p>When competitors automate first, they win attention, trust, and conversions faster.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="reveal">
+      <div class="container">
+        <h2 class="section-title">Everything Your Business Needs. Automated.</h2>
+        <p class="section-subtitle">From simple workflows to fully autonomous AI Agents and AI Swarms — we build it all.</p>
+        <div class="cards-grid-6">
+          <article class="card">
+            <div class="icon">🤖</div>
+            <h3>Agentic AI Systems</h3>
+            <p>AI agents that think, decide, and act completely on their own. No human needed.</p>
+          </article>
+          <article class="card swarm-card">
+            <div class="swarm-particles">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="icon">🐝</div>
+            <h3>AI Swarms</h3>
+            <p>Multiple AI agents working in parallel — handling 100s of tasks simultaneously at superhuman speed.</p>
+          </article>
+          <article class="card">
+            <div class="icon">⚡</div>
+            <h3>Workflow Automation</h3>
+            <p>End-to-end business workflows automated exclusively with n8n for speed, control, and reliability.</p>
+          </article>
+          <article class="card">
+            <div class="icon">📱</div>
+            <h3>WhatsApp &amp; Email Automation</h3>
+            <p>Instant responses, follow-ups, and nurturing — 24/7, automatically.</p>
+          </article>
+          <article class="card">
+            <div class="icon">📊</div>
+            <h3>CRM Automation</h3>
+            <p>Zoho, HubSpot, and custom CRMs — auto-updated in real time.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🔗</div>
+            <h3>Systems Integration</h3>
+            <p>Connect all your tools into one seamless automated ecosystem.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="reveal">
+      <div class="container">
+        <h2 class="section-title">Simple Setup. Powerful Results.</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <strong>Step 1</strong>
+            <span>We audit your current business process</span>
+          </div>
+          <div class="timeline-item">
+            <strong>Step 2</strong>
+            <span>We design your custom automation system</span>
+          </div>
+          <div class="timeline-item">
+            <strong>Step 3</strong>
+            <span>We integrate with your existing tools</span>
+          </div>
+          <div class="timeline-item">
+            <strong>Step 4</strong>
+            <span>You go live in 7-10 days</span>
+          </div>
+          <div class="timeline-item">
+            <strong>Step 5</strong>
+            <span>We monitor, optimize, and scale</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="reveal">
+      <div class="container">
+        <h2 class="section-title">Real Results. Real Numbers.</h2>
+        <div class="cards-grid-4">
+          <article class="card metric">
+            <p class="num counter" data-target="60" data-suffix=" sec">0 sec</p>
+            <p class="label">AI response time</p>
+          </article>
+          <article class="card metric">
+            <p class="num counter" data-target="3" data-suffix="x">0x</p>
+            <p class="label">More conversions</p>
+          </article>
+          <article class="card metric">
+            <p class="num counter" data-target="15" data-suffix=" hrs">0 hrs</p>
+            <p class="label">Saved per week per team</p>
+          </article>
+          <article class="card metric">
+            <p class="num counter" data-target="100" data-suffix="%">0%</p>
+            <p class="label">Done for you</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="reveal">
+      <div class="container">
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+        <div class="pricing-grid">
+          <article class="card pricing-card">
+            <h3 class="tier">Starter</h3>
+            <p class="price">₹75,000 setup + ₹20,000/month</p>
+            <p class="desc">Best for small businesses</p>
+            <a href="#contact" class="btn btn-ghost">Book Free Demo</a>
+          </article>
+          <article class="card pricing-card">
+            <span class="pricing-badge">Most Popular</span>
+            <h3 class="tier">Growth</h3>
+            <p class="price">₹1,50,000 setup + ₹35,000/month</p>
+            <p class="desc">Best for scaling businesses</p>
+            <a href="#contact" class="btn btn-primary magnetic">Book Free Demo</a>
+          </article>
+          <article class="card pricing-card">
+            <h3 class="tier">Enterprise</h3>
+            <p class="price">Custom Pricing</p>
+            <p class="desc">For large teams and complex systems</p>
+            <a href="#contact" class="btn btn-ghost">Let's Talk</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="container">
+        <h2 class="section-title">Got Questions? We Got Answers.</h2>
+        <div class="faq-list">
+          <article class="faq-item">
+            <button class="faq-q" type="button"><span>Do I need technical knowledge?</span><span>+</span></button>
+            <div class="faq-a"><p>No. We handle everything end to end.</p></div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-q" type="button"><span>How long does setup take?</span><span>+</span></button>
+            <div class="faq-a"><p>Most systems go live in 7-10 days.</p></div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-q" type="button"><span>Which tools do you integrate with?</span><span>+</span></button>
+            <div class="faq-a"><p>We build on n8n and integrate it with your existing stack like Zoho, HubSpot, WhatsApp, Gmail, and other APIs.</p></div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-q" type="button"><span>What if I'm not satisfied?</span><span>+</span></button>
+            <div class="faq-a"><p>We offer a 30-day satisfaction guarantee.</p></div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-q" type="button"><span>Do you work with any industry?</span><span>+</span></button>
+            <div class="faq-a"><p>Yes — real estate, e-commerce, healthcare, finance, and more.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="final-cta reveal">
+      <div class="container">
+        <h2>Ready to Put Your Business On Autopilot?</h2>
+        <p>Book a free 30-min strategy call. No pressure. No pitch. Just clarity.</p>
+        <a href="#demo-form" class="btn btn-primary magnetic" style="font-size: 1rem; padding: 15px 30px;">Book Free Demo</a>
+
+        <div class="contact-block" id="demo-form">
+          <form id="leadForm" novalidate>
+            <div class="contact-grid">
+              <div class="field">
+                <label for="name">Full Name</label>
+                <input id="name" name="name" type="text" required placeholder="Enter your name" />
+              </div>
+              <div class="field">
+                <label for="business">Business Name</label>
+                <input id="business" name="business" type="text" required placeholder="Enter business name" />
+              </div>
+              <div class="field">
+                <label for="email">Work Email</label>
+                <input id="email" name="email" type="email" required placeholder="you@company.com" />
+              </div>
+              <div class="field">
+                <label for="phone">WhatsApp Number</label>
+                <input id="phone" name="phone" type="tel" required placeholder="+91 98XXXXXX12" />
+              </div>
+              <div class="field field-full">
+                <label for="goal">Primary Goal</label>
+                <select id="goal" name="goal" required>
+                  <option value="">Select your automation priority</option>
+                  <option>Lead Generation Automation</option>
+                  <option>CRM + Follow-up Automation</option>
+                  <option>WhatsApp + Email Automation</option>
+                  <option>End-to-End Business Automation</option>
+                  <option>AI Agent / AI Swarm Setup</option>
+                </select>
+              </div>
+              <div class="field field-full">
+                <label for="details">What should we automate first?</label>
+                <textarea id="details" name="details" rows="4" required placeholder="Share your current workflow, pain points, and expected outcome."></textarea>
+              </div>
+            </div>
+            <div class="contact-actions">
+              <p class="form-note">We reply within 24 hours. Your data stays private.</p>
+              <button type="submit" class="btn btn-primary magnetic">Request Free Demo</button>
+            </div>
+            <p id="formMessage" class="form-message" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-wrap">
+        <div class="footer-brand">
+          <strong>WebShacsTech</strong>
+          <span>Your Business, On Autopilot.</span>
+        </div>
+        <div class="footer-links">
+          <a href="#services">Services</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer-meta">
+        <span>© 2026 WebShacsTech. All rights reserved.</span>
+        <span>Built with ❤️ in India</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById("navbar");
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.querySelector(".nav-links");
+    const hero = document.querySelector(".hero");
+    const heroGlow = document.getElementById("heroGlow");
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("mobile-open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.textContent = isOpen ? "✕" : "☰";
+      });
+
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("mobile-open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.textContent = "☰";
+        });
+      });
+    }
+
+    if (hero && heroGlow && window.matchMedia("(pointer:fine)").matches) {
+      hero.addEventListener("mousemove", (event) => {
+        const rect = hero.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const translateX = x - rect.width / 2;
+        const translateY = y - 170;
+        heroGlow.style.transform = `translate(calc(-50% + ${translateX * 0.14}px), calc(-50% + ${translateY * 0.16}px))`;
+      });
+      hero.addEventListener("mouseleave", () => {
+        heroGlow.style.transform = "translate(-50%, -50%)";
+      });
+    }
+
+    const magneticButtons = document.querySelectorAll(".magnetic");
+    magneticButtons.forEach((button) => {
+      if (!window.matchMedia("(pointer:fine)").matches) return;
+      button.addEventListener("mousemove", (event) => {
+        const rect = button.getBoundingClientRect();
+        const x = event.clientX - rect.left - rect.width / 2;
+        const y = event.clientY - rect.top - rect.height / 2;
+        button.style.transform = `translate(${x * 0.12}px, ${y * 0.18 - 2}px)`;
+      });
+      button.addEventListener("mouseleave", () => {
+        button.style.transform = "";
+      });
+    });
+
+    const onScrollHeader = () => {
+      if (window.scrollY > 16) header.classList.add("scrolled");
+      else header.classList.remove("scrolled");
+    };
+    onScrollHeader();
+    window.addEventListener("scroll", onScrollHeader, { passive: true });
+
+    const revealItems = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    revealItems.forEach((item) => revealObserver.observe(item));
+    revealItems.forEach((item, index) => {
+      item.style.transitionDelay = `${Math.min(index * 55, 260)}ms`;
+    });
+
+    const timeline = document.querySelector(".timeline");
+    if (timeline) {
+      const timelineObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              timelineObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      timelineObserver.observe(timeline);
+    }
+
+    const workflow = document.querySelector(".workflow");
+    const flowSteps = Array.from(document.querySelectorAll(".flow-step"));
+    if (workflow && flowSteps.length > 0) {
+      const workflowObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              workflow.classList.add("active");
+              workflowObserver.unobserve(workflow);
+            }
+          });
+        },
+        { threshold: 0.42 }
+      );
+      workflowObserver.observe(workflow);
+
+      let flowIndex = 0;
+      setInterval(() => {
+        flowSteps.forEach((step) => step.classList.remove("hot"));
+        flowSteps[flowIndex].classList.add("hot");
+        flowIndex = (flowIndex + 1) % flowSteps.length;
+      }, 900);
+    }
+
+    const counters = document.querySelectorAll(".counter");
+    const animateCounter = (el) => {
+      const target = Number(el.dataset.target || 0);
+      const suffix = el.dataset.suffix || "";
+      let current = 0;
+      const duration = 1200;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        current = Math.floor(progress * target);
+        el.textContent = current + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+        else el.textContent = target + suffix;
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !entry.target.dataset.done) {
+            entry.target.dataset.done = "1";
+            animateCounter(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    counters.forEach((c) => counterObserver.observe(c));
+
+    const faqItems = document.querySelectorAll(".faq-item");
+    faqItems.forEach((item) => {
+      const button = item.querySelector(".faq-q");
+      const answer = item.querySelector(".faq-a");
+      button.addEventListener("click", () => {
+        const open = item.classList.contains("open");
+        faqItems.forEach((other) => {
+          other.classList.remove("open");
+          other.querySelector(".faq-a").style.maxHeight = null;
+        });
+        if (!open) {
+          item.classList.add("open");
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+      });
+    });
+
+    const WEBHOOK_URL = "https://hazing-provable-handled.ngrok-free.de/webhook/webshacstech-lead";
+    const leadForm = document.getElementById("leadForm");
+    const formMessage = document.getElementById("formMessage");
+    if (leadForm && formMessage) {
+      leadForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        formMessage.className = "form-message";
+        const submitBtn = leadForm.querySelector('button[type="submit"]');
+
+        const data = new FormData(leadForm);
+        const payload = {
+          name: String(data.get("name") || "").trim(),
+          business: String(data.get("business") || "").trim(),
+          email: String(data.get("email") || "").trim(),
+          phone: String(data.get("phone") || "").trim(),
+          goal: String(data.get("goal") || "").trim(),
+          details: String(data.get("details") || "").trim()
+        };
+
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
+        const phoneOk = payload.phone.replace(/[^\d+]/g, "").length >= 10;
+        const allFilled = Object.values(payload).every((value) => value.length > 0);
+
+        if (!allFilled || !emailOk || !phoneOk) {
+          formMessage.textContent = "Please fill all fields with a valid email and WhatsApp number.";
+          formMessage.classList.add("error");
+          return;
+        }
+
+        if (!WEBHOOK_URL || WEBHOOK_URL.includes("PASTE_YOUR_N8N_WEBHOOK_URL_HERE")) {
+          formMessage.textContent = "Webhook URL not configured yet. Paste your n8n webhook URL in the script.";
+          formMessage.classList.add("error");
+          return;
+        }
+
+        try {
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Submitting...";
+          }
+
+          const response = await fetch(WEBHOOK_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              ...payload,
+              source: "WebShacsTech Landing Page",
+              submittedAt: new Date().toISOString()
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error(`Webhook failed with status ${response.status}`);
+          }
+
+          formMessage.textContent = "Request submitted. Our team will contact you shortly on email/WhatsApp.";
+          formMessage.classList.add("success");
+          leadForm.reset();
+        } catch (error) {
+          formMessage.textContent = "Submission failed. Please try again, or contact us directly on WhatsApp.";
+          formMessage.classList.add("error");
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Request Free Demo";
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
